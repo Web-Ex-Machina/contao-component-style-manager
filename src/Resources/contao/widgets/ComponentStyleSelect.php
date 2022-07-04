@@ -138,10 +138,20 @@ class ComponentStyleSelect extends Widget
             $opts = StringUtil::deserialize($objStyleGroups->cssClasses);
 
             foreach ($opts as $opt) {
-                $arrFieldOptions[] = array(
+                $arrFieldOption = array(
                     'label' => $opt['value'] ?: $opt['key'],
                     'value' => $opt['key']
                 );
+                // if 'value' is an array, we format the subvalues the same way
+                if(is_array($arrFieldOption['value'])){
+                    foreach($arrFieldOption['value'] as $arrFieldSuvOption){
+                        $arrFieldOption['value'][] = array(
+                            'label' => $arrFieldSuvOption['value'] ?: $arrFieldSuvOption['key'],
+                            'value' => $arrFieldSuvOption['key']
+                        );
+                    }
+                }
+                $arrFieldOptions[] = $arrFieldOption;
             }
 
             // set options
@@ -150,7 +160,7 @@ class ComponentStyleSelect extends Widget
 
             foreach ($arrFieldOptions as $strKey=>$arrOption)
             {
-                if (isset($arrOption['value']))
+                if (!is_array($arrOption['value'])) // if not an array, we want to create a single <option>. Otherwise, it's an <optgroup>
                 {
                     $arrOptions[] = sprintf('<option value="%s"%s>%s</option>',
                         StringUtil::specialchars($arrOption['value']),
