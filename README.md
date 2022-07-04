@@ -5,6 +5,8 @@
 [![unstable](https://img.shields.io/badge/unstable-develop-F38041?style=flat-square)](https://github.com/oveleon/contao-component-style-manager/tree/develop)
 [![downloads](https://img.shields.io/packagist/dt/oveleon/contao-component-style-manager?color=0A7BBC&style=flat-square)](https://packagist.org/packages/oveleon/contao-component-style-manager)
 
+:warning: This is a temporary fork.
+
 Allows you to easily manage your own CSS classes as groups provided in layouts, pages, articles, modules, news, events, forms, form elements and content elements.
 
 This plugin is designed to simplify theme customizations without the need of manually adding classes or creating new layouts.
