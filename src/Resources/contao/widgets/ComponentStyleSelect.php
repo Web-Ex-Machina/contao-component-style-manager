@@ -174,7 +174,7 @@ class ComponentStyleSelect extends Widget
                 {
                     $arrOptgroups = array();
 
-                    foreach ($arrOption as $arrOptgroup)
+                    foreach ($arrOption['value'] as $arrOptgroup)
                     {
                         $arrOptgroups[] = sprintf('<option value="%s"%s>%s</option>',
                             StringUtil::specialchars($arrOptgroup['value']),
@@ -185,7 +185,7 @@ class ComponentStyleSelect extends Widget
                             $arrOptgroup['label']);
                     }
 
-                    $arrOptions[] = sprintf('<optgroup label="&nbsp;%s">%s</optgroup>', StringUtil::specialchars($strKey), implode('', $arrOptgroups));
+                    $arrOptions[] = sprintf('<optgroup label="&nbsp;%s">%s</optgroup>', StringUtil::specialchars($arrOption['label']), implode('', $arrOptgroups));
                 }
             }
 
