@@ -134,7 +134,6 @@ class StyleManager
         }
 
         $varValues = StringUtil::deserialize($dc->activeRecord->styleManager, true);
-
         // remove vars node
         if(isset($varValues['__vars__']))
         {
@@ -232,7 +231,13 @@ class StyleManager
 
                     foreach ($arrGroup as $opts)
                     {
-                        $arrExistingValues[] = $opts['key'];
+                        if(!is_array($opts['key'])){
+                            $arrExistingValues[] = $opts['key'];
+                        }else{
+                            foreach($opts['key'] as $subOpts){
+                                $arrExistingValues[] = $subOpts['key'];
+                            }
+                        }
                     }
                 }
 
