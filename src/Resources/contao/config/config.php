@@ -4,9 +4,10 @@
  *
  * (c) https://www.oveleon.de/
  */
+use Contao\ArrayUtil;
 
 // Back end modules
-array_insert($GLOBALS['BE_MOD'], count($GLOBALS['BE_MOD']['design']), array
+ArrayUtil::arrayInsert($GLOBALS['BE_MOD'], count($GLOBALS['BE_MOD']['design']), array
 (
     'design' => array
     (
@@ -20,9 +21,10 @@ array_insert($GLOBALS['BE_MOD'], count($GLOBALS['BE_MOD']['design']), array
 ));
 
 // Back end form fields
-array_insert($GLOBALS['BE_FFL'], 1, array
+ArrayUtil::arrayInsert($GLOBALS['BE_FFL'], 1, array
 (
-    'stylemanager' => '\\Oveleon\\ContaoComponentStyleManager\\ComponentStyleSelect'
+    'stylemanager'          => '\\Oveleon\\ContaoComponentStyleManager\\ComponentStyleSelect',
+    'groupKeyValueWizard'   => '\\Oveleon\\ContaoComponentStyleManager\\GroupKeyValueWizard'
 ));
 
 // Models

@@ -377,7 +377,7 @@ class StyleManager
 
             unset($arrValue['__vars__']);
         }
-
+        
         return $arrValue;
     }
 

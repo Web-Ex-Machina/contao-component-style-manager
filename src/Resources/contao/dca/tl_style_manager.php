@@ -150,11 +150,15 @@ $GLOBALS['TL_DCA']['tl_style_manager'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_style_manager']['cssClasses'],
             'exclude'                 => true,
-            'inputType'               => 'keyValueWizard',
+            // 'inputType'               => 'keyValueWizard',
+            'inputType'               => 'groupKeyValueWizard',
             'eval'                    => array('allowHtml'=>true, 'tl_class'=>'clr long'),
             'load_callback'           => array(
                 array('tl_style_manager', 'prepareData'),
                 array('tl_style_manager', 'translateKeyValue')
+            ),
+            'save_callback'           => array(
+                array('tl_style_manager', 'saveData'),
             ),
             'sql'                     => "blob NULL"
         ),
@@ -450,8 +454,41 @@ class tl_style_manager extends Contao\Backend
                 }
             }
         }
+        $arrValue2 = [];
+        foreach($arrValue as $key => $item){
+            if(is_array($item['key'])){
+                foreach($item['key'] as $subItem){
+                    $subItem['group'] = $item['value'];
+                    $arrValue2[] = $subItem;
+                }
+            }else{
+                $arrValue2[] = $item;
+            }
+        }
 
-        return serialize($arrValue);
+        return serialize($arrValue2);
+    }
+
+    public function saveData($value, \Contao\DataContainer $dc)
+    {
+        $arrValue = \StringUtil::deserialize($value);
+
+        $arrValue2 = [];
+        foreach($arrValue as $item){
+            if(!empty($item['group'])){
+                if(!array_key_exists($item['group'],$arrValue2)){
+                    $arrValue2[$item['group']] = [
+                        'value'=>$item['group'],
+                        'key'=>[]
+                    ];
+                }
+                $arrValue2[$item['group']]['key'][] = ['key'=>$item['key'],'value'=>$item['value']];
+            }else{
+                $arrValue2[] = ['key'=>$item['key'],'value'=>$item['value']];
+            }
+        }
+
+        return serialize(array_values($arrValue2));
     }
 
     /**
