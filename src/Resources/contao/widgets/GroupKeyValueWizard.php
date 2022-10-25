@@ -115,7 +115,6 @@ class GroupKeyValueWizard extends Widget
 	 */
 	public function generate()
 	{
-		dump('coucou');
 		$arrButtons = array('copy', 'delete', 'drag');
 
 		// Make sure there is at least an empty array
