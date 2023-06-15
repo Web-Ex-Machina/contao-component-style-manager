@@ -87,7 +87,7 @@ namespace Oveleon\ContaoComponentStyleManager;
  * @author Daniele Sciannimanica <daniele@oveleon.de>
  */
 
-class StyleManagerModel extends \Model
+class StyleManagerModel extends \Contao\Model
 {
 
     /**

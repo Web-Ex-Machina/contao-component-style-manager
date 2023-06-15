@@ -314,7 +314,7 @@ $GLOBALS['TL_DCA']['tl_style_manager'] = array
  * @author Daniele Sciannimanica <daniele@oveleon.de>
  */
 
-class tl_style_manager extends Contao\Backend
+class tl_style_manager extends \Contao\Backend
 {
     /**
      * Import the back end user object
@@ -332,7 +332,7 @@ class tl_style_manager extends Contao\Backend
      */
     public function checkPermission()
     {
-        $bundles = Contao\System::getContainer()->getParameter('kernel.bundles');
+        $bundles = \Contao\System::getContainer()->getParameter('kernel.bundles');
 
         if (!isset($bundles['ContaoCalendarBundle']))
         {
@@ -388,13 +388,13 @@ class tl_style_manager extends Contao\Backend
      * Auto-generate an style group alias if it has not been set yet
      *
      * @param mixed          $varValue
-     * @param \DataContainer $dc
+     * @param \Contao\DataContainer $dc
      *
      * @return string
      *
      * @throws Exception
      */
-    public function generateAlias($varValue, \DataContainer $dc)
+    public function generateAlias($varValue, \Contao\DataContainer $dc)
     {
         $aliasExists = function (string $alias) use ($dc): bool
         {
@@ -404,7 +404,7 @@ class tl_style_manager extends Contao\Backend
         // Generate an alias if there is none
         if ($varValue == '')
         {
-            $varValue = Contao\System::getContainer()->get('contao.slug')->generate($dc->activeRecord->title, $dc->id, $aliasExists);
+            $varValue = \Contao\System::getContainer()->get('contao.slug')->generate($dc->activeRecord->title, $dc->id, $aliasExists);
         }
         elseif ($aliasExists($varValue))
         {
@@ -418,11 +418,11 @@ class tl_style_manager extends Contao\Backend
      * Prepare data from older versions
      *
      * @param mixed         $varValue
-     * @param \DataContainer $dc
+     * @param \Contao\DataContainer $dc
      *
      * @return string
      */
-    public function translateKeyValue($varValue, \DataContainer $dc)
+    public function translateKeyValue($varValue, \Contao\DataContainer $dc)
     {
         $GLOBALS['TL_LANG']['MSC']['ow_key'] = $GLOBALS['TL_LANG']['tl_style_manager']['ow_key'];
         $GLOBALS['TL_LANG']['MSC']['ow_value'] = $GLOBALS['TL_LANG']['tl_style_manager']['ow_value'];
@@ -434,13 +434,13 @@ class tl_style_manager extends Contao\Backend
      * Prepare data from older versions
      *
      * @param mixed         $varValue
-     * @param \DataContainer $dc
+     * @param \Contao\DataContainer $dc
      *
      * @return string
      */
-    public function prepareData($varValue, \DataContainer $dc)
+    public function prepareData($varValue, \Contao\DataContainer $dc)
     {
-        $arrValue = \StringUtil::deserialize($varValue);
+        $arrValue = \Contao\StringUtil::deserialize($varValue);
 
         if($arrValue !== null)
         {
@@ -471,7 +471,7 @@ class tl_style_manager extends Contao\Backend
 
     public function saveData($value, \Contao\DataContainer $dc)
     {
-        $arrValue = \StringUtil::deserialize($value);
+        $arrValue = \Contao\StringUtil::deserialize($value);
 
         $arrValue2 = [];
         foreach($arrValue as $item){
@@ -518,7 +518,7 @@ class tl_style_manager extends Contao\Backend
      */
     public function getFormFields()
     {
-        \System::loadLanguageFile('tl_form_field');
+        \Contao\System::loadLanguageFile('tl_form_field');
 
         $arrFields = $GLOBALS['TL_FFL'];
 

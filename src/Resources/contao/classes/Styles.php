@@ -7,6 +7,8 @@
 
 namespace Oveleon\ContaoComponentStyleManager;
 
+use Contao\System;
+
 class Styles
 {
     /**
@@ -149,7 +151,7 @@ class Styles
                 {
                     foreach ($GLOBALS['TL_HOOKS']['styleManagerFormatMethod'] as $callback)
                     {
-                        return \System::importStatic($callback[0])->{$callback[1]}($format, $method, $this);
+                        return System::importStatic($callback[0])->{$callback[1]}($format, $method, $this);
                     }
                 }
 

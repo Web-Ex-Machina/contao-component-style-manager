@@ -182,7 +182,7 @@ $GLOBALS['TL_DCA']['tl_style_manager_archive'] = array
 
 use Oveleon\ContaoComponentStyleManager\StyleManagerArchiveModel;
 
-class tl_style_manager_archive extends \Backend
+class tl_style_manager_archive extends \Contao\Backend
 {
     /**
      * Import the back end user object
@@ -246,7 +246,7 @@ class tl_style_manager_archive extends \Backend
      *
      * @throws Exception
      */
-    public function saveIdentifier($varValue, Contao\DataContainer $dc)
+    public function saveIdentifier($varValue, \Contao\DataContainer $dc)
     {
         $aliasExists = function (string $alias) use ($dc): bool
         {
