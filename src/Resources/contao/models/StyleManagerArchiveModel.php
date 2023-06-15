@@ -40,7 +40,7 @@ namespace Oveleon\ContaoComponentStyleManager;
  * @author Daniele Sciannimanica <daniele@oveleon.de>
  */
 
-class StyleManagerArchiveModel extends \Model
+class StyleManagerArchiveModel extends \Contao\Model
 {
 
     /**
