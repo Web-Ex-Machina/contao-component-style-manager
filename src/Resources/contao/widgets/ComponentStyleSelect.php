@@ -50,6 +50,24 @@ class ComponentStyleSelect extends Widget
         $objStyleArchives = StyleManagerArchiveModel::findAll(array('order'=>'sorting'));
 		$objStyleGroups   = StyleManagerModel::findByTable($this->strTable, array('order'=>'pid,sorting'));
 
+        if (isset($GLOBALS['TL_HOOKS']['styleManagerWidgetComponentStyleSelectGetStyleManagerArchiveModelCollection']) 
+        && \is_array($GLOBALS['TL_HOOKS']['styleManagerWidgetComponentStyleSelectGetStyleManagerArchiveModelCollection'])
+        ){
+            foreach ($GLOBALS['TL_HOOKS']['styleManagerWidgetComponentStyleSelectGetStyleManagerArchiveModelCollection'] as $callback)
+            {
+                $objStyleArchives = \Contao\System::importStatic($callback[0])->{$callback[1]}($objStyleArchives, $this);
+            }
+        }
+        
+        if (isset($GLOBALS['TL_HOOKS']['styleManagerWidgetComponentStyleSelectGetStyleManagerModelCollection']) 
+        && \is_array($GLOBALS['TL_HOOKS']['styleManagerWidgetComponentStyleSelectGetStyleManagerModelCollection'])
+        ){
+            foreach ($GLOBALS['TL_HOOKS']['styleManagerWidgetComponentStyleSelectGetStyleManagerModelCollection'] as $callback)
+            {
+                $objStyleGroups = \Contao\System::importStatic($callback[0])->{$callback[1]}($objStyleGroups, $this);
+            }
+        }
+
 		if($objStyleGroups === null || $objStyleArchives === null)
         {
             return $this->renderEmptyMessage();
